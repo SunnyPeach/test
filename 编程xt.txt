@@ -1,0 +1,341 @@
+例一：在文本中加入单引号
+#include <stdio.h>
+void main()
+{
+	printf("If at first you don\'t succeed,try,try,try again!");
+}
+结果:If at first you don't succeed,try,try,try again!
+
+例二：分行显示，\n换行符
+#include <stdio.h>
+void main()
+{
+	printf("\nMy formula for success?\nRise early ,work late,strike oil."); 
+}
+结果My formula for success?
+    Rise early ,work late,strike oil.
+插入双引号再加换行
+#include <stdio.h>
+void main()
+{
+	printf("\n\"My formula for success?\"\nRise early ,work late,strike oil."); 
+}
+结果:"My formula for success?"
+     Rise early ,work late,strike oil.
+转义序列应用
+#include <stdio.h>
+void main()
+{
+	printf("Hi there!\n\n\nThis program is a bit"); 
+	printf(" longer than the others.");
+	printf("\nBut really it's only more text.\n\n\n\a\a");
+	printf("Hey,wait a minute!!What was that???\n\n");
+	printf("\t1.\tA bird?\n");
+        printf("\t2.\tA plane?\n");
+        printf("\t3.\tA control character?\n");
+        printf("\n\t\t\bAnd how will this look when it prints out?\n\n");
+}
+结果:图一
+
+例三：变量、参数、转换说明符
+#include <stdio.h>
+void main()
+{
+	int brothers;       /*声明变量*/
+	int brides;
+	brothers=7;         /*算术赋值语句*/
+	brides=6;
+	printf("%d brides for %d brothers",brides,brothers);
+}
+结果：6 brides for 7 brothers
+#include <stdio.h>
+void main()
+{
+	
+}
+结果：We have 50 pets in total
+#include <stdio.h>
+void main()
+{
+	int Pets;
+	int Cats=2;
+	int Dogs=3;
+	int Ponies=1;
+	int Others=44;
+	Pets=Cats+Dogs+Ponies+Others;
+	printf("We have %d pets in total",Pets);
+}
+结果：We have 50 pets in total
+
+例四
+#include <stdio.h>
+void main()
+{
+	float plank_length=10.0f;
+	float piece_count=4.0f;
+	float piece_length=0.0f;
+	piece_length=plank_length/piece_count;
+	printf("A plank %f feet long can be cut into %f pieces %f feet long.\n",
+		plank_length,piece_count,piece_length);
+}
+结果：A plank 10.000000 feet long can be cut into 4.000000 pieces 2.500000 feet long.
+#include <stdio.h>
+void main()
+{
+	float plank_length=10.0f;
+	float piece_count=4.0f;
+	float piece_length=0.0f;
+	piece_length=plank_length/piece_count;
+	printf("A plank %.2f feet long can be cut into %5.1f pieces %-10.4f feet long.\n",
+		plank_length,piece_count,piece_length);
+}
+结果附图
+计算圆桌的周长和面积
+#include <stdio.h>
+void main()
+{
+	float radius=0.0f;
+	float diameter=0.0f;
+	float circumference=0.0f;
+	float area=0.0f;
+	float Pi=3.14159265f;
+	printf("Input the diameter of the table:");
+	scanf("%f",&diameter);
+	radius=diameter/2.0f;
+	circumference=2.0f*Pi*radius;
+	area=Pi*radius*radius;
+	printf("\nThe circumference is %.2f",circumference);
+	printf("\nThe area is %.2f\n",area);
+}
+结果附图
+简写版
+#include <stdio.h>
+#define PI 3.1415926f
+void main()
+{
+	float radius=0.0f;
+	float diameter=0.0f;
+	printf("Input the diameter of the table:");
+	scanf("%f",&diameter);
+	radius=diameter/2.0f;
+	printf("\nThe circumference is %.2f",2.0f*PI*radius);
+	printf("\nThe area is %.2f\n",PI*radius*radius);
+}
+
+例五：强制类型转换
+#include <stdio.h>  方法一
+void main()
+{
+	const float Revenue_Per_150=4.5f;
+	short JanSold=23500;
+	short FebSold=19300;
+	short MarSold=21600;
+	float RevQuarter=0.0f;
+	double QuarterSold=JanSold+FebSold+MarSold;
+	printf("Stock sold in\n Jan:%d\n Feb:%d\n Mar:%d\n",JanSold,FebSold,MarSold);
+	printf("Total stock sold in first quarter:%.0lf\n",QuarterSold);
+	RevQuarter=QuarterSold/150*Revenue_Per_150;  /*如果QuarterSold设置为Long型会有误差，除时省略了小数点后面数值，导致数值偏差*/
+	printf("Sales revenue this quarter is:$%.2f\n",RevQuarter);
+}
+结果附图
+#include <stdio.h>   方法二
+void main()
+{
+	const float Revenue_Per_150=4.5f;
+	short JanSold=23500;
+	short FebSold=19300;
+	short MarSold=21600;
+	float RevQuarter=0.0f;
+	long QuarterSold=JanSold+FebSold+MarSold;
+	printf("Stock sold in\n Jan:%d\n Feb:%d\n Mar:%d\n",JanSold,FebSold,MarSold);
+	printf("Total stock sold in first quarter:%ld\n",QuarterSold);
+	RevQuarter=QuarterSold*Revenue_Per_150/150;  /*先乘时小数点后没有数，避免了误差*/
+	printf("Sales revenue this quarter is:$%.2f\n",RevQuarter);
+}
+#include <stdio.h>   方法三       
+void main()
+{
+	const float Revenue_Per_150=4.5f;
+	short JanSold=23500;
+	short FebSold=19300;
+	short MarSold=21600;
+	float RevQuarter=0.0f;
+	long QuarterSold=JanSold+FebSold+MarSold;
+	printf("Stock sold in\n Jan:%d\n Feb:%d\n Mar:%d\n",JanSold,FebSold,MarSold);
+	printf("Total stock sold in first quarter:%ld\n",QuarterSold);
+	RevQuarter=(float)QuarterSold/150.0f*Revenue_Per_150;  /*在变量前加括号且写上类型，就变成了想要的类型，强制转换*/
+	printf("Sales revenue this quarter is:$%.2f\n",RevQuarter);
+}
+
+例六：字符型char
+#include <stdio.h>      
+void main()
+{
+	char first='T';
+	char second=20;
+	printf("\nThe first example as a letter looks like this - %c",first);
+        printf("\nThe first example as a number looks like this - %d",first);
+        printf("\nThe second example as a letter looks like this - %c",second);
+        printf("\nThe second example as a number looks like this - %d\n",second);
+}
+结果附图
+#include <stdio.h>
+void main()
+{
+	char first='T';
+	char second=20;
+	printf("\nThe first example as a letter looks like this - %c",first);
+    printf("\nThe first example as a number looks like this - %d",first);  /*十进制整数值*/
+    printf("\nThe second example as a letter looks like this - %c",second);
+    printf("\nThe second example as a number looks like this - %x\n",second);   /*十六进制整数值*/
+}
+
+#include <stdio.h>
+void main()
+{
+	char first='A';
+	char second='B';
+	char last='Z';
+	char number=40;
+	char ex1=first+2;
+	char ex2=second-1;
+	char ex3=last+2;
+	printf("character values  %-5c%-5c%-5c",ex1,ex2,ex3);/*左对齐，字符宽度为5，输出字符*/
+	printf("\nNumerical equivalents  %-5d%-5d%-5d",ex1,ex2,ex3);
+	printf("\nThe number %d is the code for the character  %c\n",number,number);
+}
+
+例七：找到边界值
+#include <stdio.h>
+#include <limits.h>
+#include <float.h>
+void main()
+{
+	printf("Variables of type char store values from %d to %d",CHAR_MIN,CHAR_MAX);
+    printf("\nVariables of type unsigned char store values from 0 to %u",UCHAR_MAX);
+    printf("\nVariables of type short store values from %d to %d",SHRT_MIN,SHRT_MAX);
+    printf("\nVariables of type unsigned short store values from 0 to %u",USHRT_MAX);
+    printf("\nVariables of type int store values from %d to %d",INT_MIN,INT_MAX);
+    printf("\nVariables of type unsigned int store values from 0 to %u",UINT_MAX);
+    printf("\nVariables of type long store values from %d to %d",LONG_MIN,LONG_MAX);
+    printf("\nVariables of type unsigned long store values from 0 to %u",ULONG_MAX);
+    printf("\n\nThe size of the smallest non-zero value of type float is %.3e",FLT_MIN);/*%e用指数形式表示值*/
+    printf("\nThe size of the largest value of type float is %.3e",FLT_MAX);
+    printf("\nThe size of the smallest non-zero value of type double is %.3e",DBL_MIN);
+    printf("\nThe size of the largest value of type double is %.3e",DBL_MAX);
+    printf("\nThe size of the smallest non-zero value of type long double is %.3e",DBL_MIN);
+    printf("\nThe size of the largest value of type long double is %.3e\n",DBL_MAX);
+}
+
+例八：查明给定类型占用的字节数,用sizeof运算符
+#include <stdio.h>
+void main()
+{
+	printf("\nVariables of type char occupy %d bytes",sizeof(char));
+    printf("\nVariables of type short occupy %d bytes",sizeof(short));
+    printf("\nVariables of type int occupy %d bytes",sizeof(int));
+    printf("\nVariables of type long occupy %d bytes",sizeof(long));
+    printf("\nVariables of type float occupy %d bytes",sizeof(float));
+    printf("\nVariables of type double occupy %d bytes",sizeof(double));
+    printf("\nVariables of type long double occupy %d bytes",sizeof(long double));
+}
+以浮点值输入周薪和工作时间，算出平均工资。
+有返回值写法
+#include <stdio.h>
+void main()
+{
+	float week_salary=0.0f;
+	float total_time=5.0f;
+	int s=0;
+	printf("Input the week_salary of the people:");
+	scanf("%f",&week_salary);
+    s=week_salary/total_time;
+	printf("\nYour average hourly pay rate is %d dollars and %5.2f cents\n",s,100*(week_salary/total_time-s));
+	return 0;
+}
+无返回值写法
+#include <stdio.h>
+void main()
+{
+	float week_salary=0.0f;
+	float total_time=0.0f;
+	int s=0;
+	float t=0.0f;
+	printf("Input the week_salary of the people:");
+	scanf("%f",&week_salary);
+    printf("Input the total_time of the people:");
+	scanf("%f",&total_time);
+	s=week_salary/total_time;
+	t=100*(week_salary/total_time-s);
+	printf("your averge hourly pay rate is %d dollars and %5.2f cents\n",s,t);
+}
+
+例九.If语句
+#include <stdio.h>
+void main()
+{
+	int number = 0;
+	printf("\nEnter an integer between 1 and 10:");
+	scanf("%d",&number);
+	if (number > 5)
+		printf("You entered %d which is greater than 5\n", number);
+	if (number < 6)
+		printf("You entered %d which is less than 6\n",number);
+
+}
+
+If-else语句
+#include <stdio.h>
+void main()
+{
+	const double unit_price = 3.5;
+	int quantity = 0;
+	printf("Enter the number that you want to buy:");
+	scanf("%d", &quantity);
+	if(quantity > 10)
+		printf("The price for %d is $%.2f\n", quantity, quantity*unit_price*0.95);
+	else 
+		printf("The price for %d is $%.2f\n", quantity, quantity*unit_price);
+}
+
+嵌套的If语句
+#include <stdio.h>
+#include <limits.h>
+void main()
+{
+	long test = 0L;
+	printf("Enter an integer less than %ld:", LONG_MAX);
+	scanf("%ld", &test);
+	if(test % 2L == 0L)
+	{
+		printf("The number %ld is even\n", test);
+		if( (test/2L) % 2L ==0L)
+		{
+			printf("Half of %ld is also even", test);
+			printf("\nThat's interesting isn't it?\n");
+		}
+
+	}
+	else
+		printf("The number %ld is odd\n", test);
+
+}
+把输入的大写字母转换成小写字母
+#include <stdio.h>
+void main()
+{
+	char letter = 0;
+	printf("Enter an uppercase letter:");
+	scanf("%c", &letter);
+	if(letter >= 'A')
+		if(letter <= 'Z')
+		{
+			letter = letter - 'A'+'a';
+			printf("You entered an uppercase %c\n", letter);
+		}
+		else
+			printf("Try using the shift key, Bud! I want a capital letter.\n");
+
+}
+
+
